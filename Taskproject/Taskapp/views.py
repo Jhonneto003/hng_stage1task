@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 import requests
+from django.conf import settings
 
 
 # Create your views here.
@@ -27,7 +28,7 @@ class TaskView(View):
             location = location_data.get('location', 'Unknown')
 
             #get weather data
-            weatherapi_key = '1b1a89458dfb921532441cf9a48abb43'
+            weatherapi_key = settings.WEATHER_API_KEY
             weather_response = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={location}&appid={weatherapi_key}&units=metric')
             weather_data = weather_response.json()
             temperature = weather_data['main']['temp']
