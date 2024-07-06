@@ -2,7 +2,11 @@
     "builds": [{
         "src": "Taskproject/wsgi.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" ,"installCommand": "bash install_pip.sh && pip install -r requirements.txt", "buildCommand": "python manage.py collectstatic --noinput"}
+        "config": { "maxLambdaSize": "15mb", 
+        "runtime": "python3.9" ,
+        "installCommand": "bash install_pip.sh && pip install -r requirements.txt", 
+        "buildCommand": "bash build_files.sh"
+    }
     },
     {
         "src": "build_files.sh",
