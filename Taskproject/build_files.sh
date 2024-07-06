@@ -1,28 +1,26 @@
 #!/bin/bash
 
-# Source the environment to ensure paths are set correctly
-source $HOME/.bashrc
-
-# Ensure pip and python commands are available
-if ! command -v pip &> /dev/null
+# Ensure Python and pip commands are available
+if ! command -v python3.9 &> /dev/null
 then
-    echo "pip could not be found. Installing pip..."
-    # Ensure Python is installed
-    if ! command -v python3.9 &> /dev/null
-    then
-        echo "Python 3.9 could not be found. Installing Python 3.9..."
-        sudo apt-get update
-        sudo apt-get install python3.9
-    fi
-    # Install pip using the specific version of Python
-    python3.9 -m ensurepip
-    python3.9 -m pip install --upgrade pip
-else
-    echo "pip is already installed."
+    echo "Python 3.9 could not be found. Installing Python 3.9..."
+    sudo apt-get update
+    sudo apt-get install -y python3.9 python3.9-distutils
 fi
 
-# Install the required Python packages
-pip install -r requirements.txt
+if ! command -v pip3.9 &> /dev/null
+then
+    echo "pip for Python 3.9 could not be found. Installing pip for Python 3.9..."
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3.9 get-pip.py --user
+    rm get-pip.py
+fi
+
+# Ensure pip and Python are accessible
+export PATH="$HOME/.local/bin:$PATH:/vercel/.local/bin"
+
+# Install Python dependencies
+pip3.9 install --user -r requirements.txt
 
 # Collect static files
 python3.9 manage.py collectstatic --noinput
