@@ -9,3 +9,7 @@ pip install -r requirements.txt
 
 # Run collectstatic
 python manage.py collectstatic --noinput
+
+# Ensure pip is installed
+bash install_pip.sh
+
