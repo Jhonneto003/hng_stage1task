@@ -17,7 +17,7 @@ then
 fi
 
 # Ensure pip and Python are accessible
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH:/vercel/.local/bin"
 
 # Install Python dependencies
 pip3.9 install --user -r requirements.txt
